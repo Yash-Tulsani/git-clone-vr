@@ -26,7 +26,7 @@
 
     <div class="viewer">
         <video id="video" class="video-js  vjs-fluid vjs-default-skin vjs-big-play-centered vjs-controls-enabled" crossorigin playsinline="playsinline" controls="" loop="">
-            <source src="https://sih-backend.s3.ap-south-1.amazonaws.com/VR-Videos/Inside+Taj+Mahal+in+360%C2%B0+5K+VR+A+virtual+experiences+of+Agra+Tour+(1).webm" type="video/mp4">
+            <source src="videos/GoldenTemple.webm" type="video/mp4">
             <p class="vjs-no-js">
                 To view this video please enable JavaScript, and consider upgrading to a web browser that
                 <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
@@ -48,8 +48,7 @@
     <script>
         var video = document.getElementById("video");
 
-        if ( video.readyState >= 4 ) {
-            videojs("video").ready(function () {
+        videojs("video").ready(function () {
             var video = document.querySelector(".viewer video");
             var videoContainer = document.querySelector("#video");
             var view360Container = document.createElement('div');
@@ -68,12 +67,11 @@
             });
 
             PanoControls.init(document.querySelector("#video"), panoViewer,{
-            enableGyroOption: true,
-            enableTouchOption: true
-        });
+                enableGyroOption: true,
+                enableTouchOption: true
+            });
             PanoControls.showLoading();
-        });
-        }
+            });
         
     </script>
 

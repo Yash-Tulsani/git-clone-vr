@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Hero VR - VRTour</title>
+
+    <link rel="stylesheet" href="asset/demo.css">
+    <script src="https://pchen66.github.io/js/three/three.min.js"></script>
+    <script src="https://rawgit.com/pchen66/panolens.js/dev/build/panolens.min.js"></script>
+
+    <style rel="stylesheet">
+        html,
+        body {
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+          margin: 0;
+        }
+    
+        #container {
+          width: 100%;
+          height: 100%;
+        }
+      </style>
+</head>
+
+<body>
+
+  <div id="container"></div>
+
+  <script>
+    var panorama, viewer, container;
+
+    var lookAtPosition = new THREE.Vector3(4000, -600, -500);
+
+    container = document.querySelector('#container');
+
+    panorama = new PANOLENS.ImagePanorama( 'https://sushantpatial.github.io/VR/images/hero.jpeg' );
+    panorama.addEventListener( 'enter-fade-start', function(){
+      viewer.tweenControlCenter( lookAtPosition, 0 );
+    } );
+
+    viewer = new PANOLENS.Viewer({
+      container: container,
+      autoRotate: true, 
+      autoRotateSpeed: 0.5, 
+      autoRotateActivationDuration: 2000,
+      controlBar: false,
+    });
+    viewer.getCamera().fov = 75;
+    viewer.getCamera().updateProjectionMatrix();
+    PANOLENS.Controls='DEVICEORIENTATION',
+    viewer.OrbitControls.noZoom = true;
+    viewer.add(panorama);
+    
+  </script>
+
+</body>
+</html>

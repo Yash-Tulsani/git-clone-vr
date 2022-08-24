@@ -25,8 +25,8 @@
      -->
 
     <div class="viewer">
-        <video id="video" class="video-js  vjs-fluid vjs-default-skin vjs-big-play-centered vjs-controls-enabled" crossorigin playsinline="playsinline" controls="" loop="">
-            <source src="https://sih-backend.s3.ap-south-1.amazonaws.com/VR-Videos/Inside+Taj+Mahal+in+360%C2%B0+5K+VR+A+virtual+experiences+of+Agra+Tour+(1).webm" type="video/mp4">
+        <video id="video" class="video-js  vjs-fluid vjs-default-skin vjs-big-play-centered vjs-controls-enabled" crossorigin="anonymous" playsinline="playsinline" controls="" loop="">
+            <source src="https://sih-backend.s3.ap-south-1.amazonaws.com/VR-Videos/Inside+Taj+Mahal+in+360%C2%B0+5K+VR+A+virtual+experiences+of+Agra+Tour+(1).webm" type="video/webm">
             <p class="vjs-no-js">
                 To view this video please enable JavaScript, and consider upgrading to a web browser that
                 <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
@@ -35,7 +35,7 @@
     </div>
 
     <script src="https://vjs.zencdn.net/7.17.0/video.js"></script>
-    <script src="https://naver.github.io/egjs-view360/common/js/jquery-2.2.4.js"></script>
+    <script srcc="https://naver.github.io/egjs-view360/common/js/jquery-2.2.4.js"></script>
     <script src="https://naver.github.io/egjs-view360/common/js/PieView.js"></script>
     <script src="https://naver.github.io/egjs-view360/common/js/screenfull.min.js"></script>
     <script src="https://naver.github.io/egjs-view360/common/js/GyroTouchOptions.js"></script>
@@ -46,8 +46,6 @@
     <script src="https://naver.github.io/egjs-view360/common/js/initXR.js"></script>
     
     <script>
-        var video = document.getElementById("video");
-
         videojs("video").ready(function () {
             var video = document.querySelector(".viewer video");
             var videoContainer = document.querySelector("#video");

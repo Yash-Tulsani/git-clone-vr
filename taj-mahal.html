@@ -6,9 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Taj Mahal VR Video</title>
 
-    <link rel="stylesheet" href="asset/demo.css">
+    <link rel="stylesheet" href="https://naver.github.io/egjs-view360/common/css/demo.css">
     <link rel="stylesheet" href="https://vjs.zencdn.net/7.17.0/video-js.css">
     <link rel="stylesheet" href="https://naver.github.io/egjs-view360/common/css/PanoControls.css">
+
+    <script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"></script>
+    <script src="https://naver.github.io/egjs-view360/common/js/PieView.js"></script>
+    <script src="https://naver.github.io/egjs-view360/common/js/screenfull.min.js"></script>
+    <script src="https://naver.github.io/egjs-view360/common/js/GyroTouchOptions.js"></script>
+    <script src="https://vjs.zencdn.net/7.17.0/video.js"></script>
+    <script src="https://naver.github.io/egjs-view360/release/latest/dist/view360.pkgd.js"></script>
+    <script src="https://naver.github.io/egjs-view360/common/js/PanoControls.js"></script>
+    <!-- <script src="https://cdn.jsdelivr\.net/npm/sweetalert2@9.7.2/dist/sweetalert2.all.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/webxr-polyfill@latest/build/webxr-polyfill.min.js"></script>
+    <script src="https://naver.github.io/egjs-view360/common/js/initXR.js"></script>
 
     <style rel="stylesheet">
         .viewer:after {
@@ -24,7 +38,9 @@
     </video>
      -->
 
-    <div class="viewer">
+     <div id="container"></div>
+
+     <div class="viewer">
         <video id="video" class="video-js  vjs-fluid vjs-default-skin vjs-big-play-centered vjs-controls-enabled" crossorigin="anonymous" playsinline="playsinline" controls="" loop="">
             <source src="https://sih-backend.s3.ap-south-1.amazonaws.com/VR-Videos/Inside+Taj+Mahal+in+360%C2%B0+5K+VR+A+virtual+experiences+of+Agra+Tour+(1).webm" type="video/webm">
             <p class="vjs-no-js">
@@ -34,42 +50,51 @@
         </video>
     </div>
 
-    <script src="https://vjs.zencdn.net/7.17.0/video.js"></script>
-    <script srcc="https://naver.github.io/egjs-view360/common/js/jquery-2.2.4.js"></script>
-    <script src="https://naver.github.io/egjs-view360/common/js/PieView.js"></script>
-    <script src="https://naver.github.io/egjs-view360/common/js/screenfull.min.js"></script>
-    <script src="https://naver.github.io/egjs-view360/common/js/GyroTouchOptions.js"></script>
-    <script src="https://naver.github.io/egjs-view360/release/latest/dist/view360.pkgd.js"></script>
-    <script src="https://naver.github.io/egjs-view360/common/js/PanoControls.js"></script>
-    <!-- <script src="https://cdn.jsdelivr\.net/npm/sweetalert2@9.7.2/dist/sweetalert2.all.min.js"></script> -->
-    <script src="https://cdn.jsdelivr.net/npm/webxr-polyfill@latest/build/webxr-polyfill.min.js"></script>
-    <script src="https://naver.github.io/egjs-view360/common/js/initXR.js"></script>
+    <button id="fullscreen-toggle" class="ui icon button">
+        1
+    </button>
+    
     
     <script>
         videojs("video").ready(function () {
-            var video = document.querySelector(".viewer video");
-            var videoContainer = document.querySelector("#video");
-            var view360Container = document.createElement('div');
+      var video = document.querySelector(".viewer video");
+      var videoContainer = document.querySelector("#video");
+      var view360Container = document.createElement('div');
 
-            view360Container.className = "container";
-            videoContainer.insertBefore(view360Container, videoContainer.firstChild);
+      view360Container.className = "container";
+      videoContainer.insertBefore(view360Container, videoContainer.firstChild);
 
-            var panoViewer = new eg.view360.PanoViewer(view360Container, {
-                video: video,
-                projectionType: "equirectangular",
-                useZoom: false,
-            });
+      var panoViewer = new eg.view360.PanoViewer(view360Container,
+          {
+              video: video,
+              projectionType: "equirectangular",
+              useZoom: true,
+          }
+      );
+  panoViewer.on('ready', () => {
+      panoViewer.lookAt({
+    yaw: 0,
+    pitch: 0,
+    fov: 110
+  }, 1000)
+  })
+  
+  setInterval(() => {
+          var newLastYaw = panoViewer.getYaw()
+      var newLastPitch = panoViewer.getPitch()
+      var newFov = panoViewer.getFov()
+      console.log({
+        yaw: newLastYaw,
+        pitch: newLastPitch,
+        pitchRange: panoViewer.getPitchRange(),
+        fov: newFov
+      })
+  }, 1000)
 
-            window.addEventListener("resize", function () {
-                panoViewer.updateViewportDimensions();
-            });
-
-            PanoControls.init(document.querySelector("#video"), panoViewer,{
-            enableGyroOption: true,
-            enableTouchOption: true
-        });
-            PanoControls.showLoading();
-        });
+      PanoControls.init(document.querySelector("#video"), panoViewer);
+      PanoControls.showLoading();
+  });
+        
         
     </script>
 

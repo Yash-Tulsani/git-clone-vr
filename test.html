@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .icon {
+    width: 275px;
+    height: 60px;
+}
+.icon .videojs {
+    position: absolute;
+    width: 80px;
+    height: 60px;
+}
+.icon .videojs .left, .icon .videojs .right {
+    position: absolute;
+    width: 50px;
+    height: 60px;
+}
+.icon .videojs .left {
+    left: 0;
+}
+.icon .videojs .left:before, .icon .videojs .left:after, .icon .videojs .right:before, .icon .videojs .right:after {
+    position: absolute;
+    content: "";
+    left: 0;
+    width: 100%;
+    height: 50%;
+    border: 5px solid #73777E;
+    box-sizing: border-box;
+}
+.icon .videojs .left:before, .icon .videojs .left:after {
+    background: #ECEEF1;
+    border-left-width: 7px;
+    border-right-width: 4px;
+    /* transform-origin: 0% 50%; */
+}
+.icon .videojs .left:before {
+    transform: skew(-40deg);
+    border-bottom: 0;
+}
+.icon .videojs .left:after {
+    top: 50%;
+    transform: skew(40deg);
+    border-top: 0;
+}
+.icon .videojs .right {
+    right: 0%;
+    width: 55px;
+}
+.icon .videojs .right:before, .icon .videojs .right:after {
+    background: #C9CCD1;
+    border-right-width: 7px;
+    border-left-width: 20px;
+    transform-origin: 100% 50%;
+}
+.icon .videojs .right:before {
+    transform: skew(40deg);
+    border-bottom: 0;
+}
+.icon .videojs .right:after {
+    top: 50%;
+    transform: skew(-40deg);
+    border-top: 0;
+}
+.icon .view360 {
+    position: absolute;
+    font-family: 'Zilla Slab', serif;
+    right: 0px;
+    font-size: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.viewer video {
+    width: 100%;
+}
+.viewer #video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.viewer video {
+    /* z-index: -1; */
+}
+    
+    </style>
+</head>
+<body>
+    <div class="viewer">
+        <video id="video" class="video-js  vjs-fluid vjs-default-skin vjs-big-play-centered vjs-controls-enabled" crossorigin="anonymous" playsinline="playsinline" controls="" loop="">
+            <source src="https://naver.github.io/egjs-view360/examples/panoviewer/etc/img/seven.mp4" type="video/mp4">
+            <source src="https://naver.github.io/egjs-view360/examples/panoviewer/etc/img/seven.webm" type="video/webm">
+            <p class="vjs-no-js">
+                To view this video please enable JavaScript, and consider upgrading to a web browser that
+                <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+            </p>
+        </video>
+    </div>
+    
+
+    <script src="https://vjs.zencdn.net/7.17.0/video.js"></script>
+    <script src="https://naver.github.io/egjs-view360/common/js/jquery-2.2.4.js"></script>
+    <script src="https://naver.github.io/egjs-view360/common/js/PieView.js"></script>
+    <script src="https://naver.github.io/egjs-view360/common/js/screenfull.min.js"></script>
+    <script src="https://naver.github.io/egjs-view360/common/js/GyroTouchOptions.js"></script>
+    <script src="https://naver.github.io/egjs-view360/release/latest/dist/view360.pkgd.js"></script>
+    <script src="https://naver.github.io/egjs-view360/common/js/PanoControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.7.2/dist/sweetalert2.all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/webxr-polyfill@latest/build/webxr-polyfill.min.js"></script>
+    <script src="https://naver.github.io/egjs-view360/common/js/initXR.js"></script>
+
+
+    <script>
+        videojs("video").ready(function () {
+      var video = document.querySelector(".viewer video");
+      var videoContainer = document.querySelector("#video");
+      var view360Container = document.createElement('div');
+
+      view360Container.className = "container";
+      videoContainer.insertBefore(view360Container, videoContainer.firstChild);
+
+      var panoViewer = new eg.view360.PanoViewer(view360Container,
+          {
+              video: video,
+              projectionType: "equirectangular",
+              useZoom: false,
+          }
+      );
+
+      window.addEventListener("resize", function() {
+          panoViewer.updateViewportDimensions();
+      });
+
+      PanoControls.init(document.querySelector("#video"), panoViewer);
+      PanoControls.showLoading();
+  });
+
+    </script>
+    
+    
+    
+    
+</body>
+</html>

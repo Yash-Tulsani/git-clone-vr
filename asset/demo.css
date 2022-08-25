@@ -8,11 +8,11 @@ body {
   height: 34px;
   position: absolute;
   left: 5px;
-  bottom: 40px;
+  bottom: 45px;
   z-index: 10;
   display: flex;
   justify-content: center;
-  background-color: #7fbeff;
+  background-color: #E4802F;
   border: 1px;
   border-radius: 3px;
   padding: 2px;
@@ -22,7 +22,7 @@ body {
   vertical-align: middle;
 }
 #sound-button:hover {
-  background-color: #7F1E1F;
+  background-color: #d16e1d;
 }      
 #sound-button svg {
   height: 22px;
@@ -30,6 +30,14 @@ body {
 }
 #sound-button .volume {
   display: none;
+}
+
+.viewer button, .viewer .optionSet .option {
+  cursor: pointer;
+  background-color: #E4802F;
+}
+.viewer .optionSet .option:hover {
+  background-color: #d16e1d;
 }
 
 .vjs-fullscreen-control {

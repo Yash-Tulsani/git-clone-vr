@@ -12,7 +12,7 @@ body {
   z-index: 10;
   display: flex;
   justify-content: center;
-  background-color: #E4802F;
+  background-color: #E4802F !important;
   border: 1px;
   border-radius: 3px;
   padding: 2px;

@@ -1,150 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
 
-    <style>
-        .icon {
-    width: 275px;
-    height: 60px;
-}
-.icon .videojs {
-    position: absolute;
-    width: 80px;
-    height: 60px;
-}
-.icon .videojs .left, .icon .videojs .right {
-    position: absolute;
-    width: 50px;
-    height: 60px;
-}
-.icon .videojs .left {
-    left: 0;
-}
-.icon .videojs .left:before, .icon .videojs .left:after, .icon .videojs .right:before, .icon .videojs .right:after {
-    position: absolute;
-    content: "";
-    left: 0;
-    width: 100%;
-    height: 50%;
-    border: 5px solid #73777E;
-    box-sizing: border-box;
-}
-.icon .videojs .left:before, .icon .videojs .left:after {
-    background: #ECEEF1;
-    border-left-width: 7px;
-    border-right-width: 4px;
-    /* transform-origin: 0% 50%; */
-}
-.icon .videojs .left:before {
-    transform: skew(-40deg);
-    border-bottom: 0;
-}
-.icon .videojs .left:after {
-    top: 50%;
-    transform: skew(40deg);
-    border-top: 0;
-}
-.icon .videojs .right {
-    right: 0%;
-    width: 55px;
-}
-.icon .videojs .right:before, .icon .videojs .right:after {
-    background: #C9CCD1;
-    border-right-width: 7px;
-    border-left-width: 20px;
-    transform-origin: 100% 50%;
-}
-.icon .videojs .right:before {
-    transform: skew(40deg);
-    border-bottom: 0;
-}
-.icon .videojs .right:after {
-    top: 50%;
-    transform: skew(-40deg);
-    border-top: 0;
-}
-.icon .view360 {
-    position: absolute;
-    font-family: 'Zilla Slab', serif;
-    right: 0px;
-    font-size: 40px;
-    top: 50%;
-    transform: translateY(-50%);
-}
-.viewer video {
-    width: 100%;
-}
-.viewer #video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-.viewer video {
-    /* z-index: -1; */
-}
-    
-    </style>
-</head>
-<body>
-    <div class="viewer">
-        <video id="video" class="video-js  vjs-fluid vjs-default-skin vjs-big-play-centered vjs-controls-enabled" crossorigin="anonymous" playsinline="playsinline" controls="" loop="">
-            <source src="https://naver.github.io/egjs-view360/examples/panoviewer/etc/img/seven.mp4" type="video/mp4">
-            <source src="https://naver.github.io/egjs-view360/examples/panoviewer/etc/img/seven.webm" type="video/webm">
-            <p class="vjs-no-js">
-                To view this video please enable JavaScript, and consider upgrading to a web browser that
-                <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
-            </p>
-        </video>
-    </div>
-    
+    <link rel="stylesheet" href="asset/demo.css" />
+    <link
+      rel="stylesheet"
+      href="https://naver.github.io/egjs-view360/common/css/PanoControls.css"
+    />
 
-    <script src="https://vjs.zencdn.net/7.17.0/video.js"></script>
-    <script src="https://naver.github.io/egjs-view360/common/js/jquery-2.2.4.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://naver.github.io/egjs-view360/common/js/PieView.js"></script>
     <script src="https://naver.github.io/egjs-view360/common/js/screenfull.min.js"></script>
     <script src="https://naver.github.io/egjs-view360/common/js/GyroTouchOptions.js"></script>
+    <script src="https://vjs.zencdn.net/7.17.0/video.js"></script>
     <script src="https://naver.github.io/egjs-view360/release/latest/dist/view360.pkgd.js"></script>
     <script src="https://naver.github.io/egjs-view360/common/js/PanoControls.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.7.2/dist/sweetalert2.all.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/webxr-polyfill@latest/build/webxr-polyfill.min.js"></script>
     <script src="https://naver.github.io/egjs-view360/common/js/initXR.js"></script>
 
+    <style>
+        #sound-button {
+            width: 40px;
+            height: 34px;
+            position: absolute;
+            left: 5px;
+            bottom: 40px;
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            background-color: #7fbeff;
+            border: 1px;
+            border-radius: 3px;
+            padding: 2px;
+            box-sizing: border-box;
+            font-size: 0;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        #sound-button:hover {
+            background-color: #7F1E1F;
+        }      
+        #sound-button svg {
+            height: 22px;
+            fill: #fff;
+        }
+        #sound-button .volume {
+            display: none;
+        }
+    </style>
+  </head>
+
+  <body>
+    <div class="panoviewer-container viewer">
+      <div id="panoSet">
+        <div class="panoviewer container" id="myPanoViewer"></div>
+        <button id="sound-button">
+            <svg class="mute" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M301.2 34.85c-11.5-5.188-25.02-3.122-34.44 5.253L131.8 160H48c-26.51 0-48 21.49-48 47.1v95.1c0 26.51 21.49 47.1 48 47.1h83.84l134.9 119.9c5.984 5.312 13.58 8.094 21.26 8.094c4.438 0 8.972-.9375 13.17-2.844c11.5-5.156 18.82-16.56 18.82-29.16V64C319.1 51.41 312.7 40 301.2 34.85zM513.9 255.1l47.03-47.03c9.375-9.375 9.375-24.56 0-33.94s-24.56-9.375-33.94 0L480 222.1L432.1 175c-9.375-9.375-24.56-9.375-33.94 0s-9.375 24.56 0 33.94l47.03 47.03l-47.03 47.03c-9.375 9.375-9.375 24.56 0 33.94c9.373 9.373 24.56 9.381 33.94 0L480 289.9l47.03 47.03c9.373 9.373 24.56 9.381 33.94 0c9.375-9.375 9.375-24.56 0-33.94L513.9 255.1z"/></svg>
+            <svg class="volume" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M412.6 182c-10.28-8.334-25.41-6.867-33.75 3.402c-8.406 10.24-6.906 25.35 3.375 33.74C393.5 228.4 400 241.8 400 255.1c0 14.17-6.5 27.59-17.81 36.83c-10.28 8.396-11.78 23.5-3.375 33.74c4.719 5.806 11.62 8.802 18.56 8.802c5.344 0 10.75-1.779 15.19-5.399C435.1 311.5 448 284.6 448 255.1S435.1 200.4 412.6 182zM473.1 108.2c-10.22-8.334-25.34-6.898-33.78 3.34c-8.406 10.24-6.906 25.35 3.344 33.74C476.6 172.1 496 213.3 496 255.1s-19.44 82.1-53.31 110.7c-10.25 8.396-11.75 23.5-3.344 33.74c4.75 5.775 11.62 8.771 18.56 8.771c5.375 0 10.75-1.779 15.22-5.431C518.2 366.9 544 313 544 255.1S518.2 145 473.1 108.2zM534.4 33.4c-10.22-8.334-25.34-6.867-33.78 3.34c-8.406 10.24-6.906 25.35 3.344 33.74C559.9 116.3 592 183.9 592 255.1s-32.09 139.7-88.06 185.5c-10.25 8.396-11.75 23.5-3.344 33.74C505.3 481 512.2 484 519.2 484c5.375 0 10.75-1.779 15.22-5.431C601.5 423.6 640 342.5 640 255.1S601.5 88.34 534.4 33.4zM301.2 34.98c-11.5-5.181-25.01-3.076-34.43 5.29L131.8 160.1H48c-26.51 0-48 21.48-48 47.96v95.92c0 26.48 21.49 47.96 48 47.96h83.84l134.9 119.8C272.7 477 280.3 479.8 288 479.8c4.438 0 8.959-.9314 13.16-2.835C312.7 471.8 320 460.4 320 447.9V64.12C320 51.55 312.7 40.13 301.2 34.98z"/></svg>
+         </button>
+      </div>
+    </div>
+
+    <audio id="track">
+        <source src="/audio/tajmahal.mp3" type="audio/mpeg" />
+    </audio>
 
     <script>
-        videojs("video").ready(function () {
-      var video = document.querySelector(".viewer video");
-      var videoContainer = document.querySelector("#video");
-      var view360Container = document.createElement('div');
+        // create PanoViewer with option
+        var PanoViewer = eg.view360.PanoViewer;
+        var container = document.getElementById("myPanoViewer");
+        var panoViewer = new PanoViewer(container, {
+            image: "https://i.ibb.co/JnT6Yz1/image.png",
+            projectionType: "equirectangular",
+        });
 
-      view360Container.className = "container";
-      videoContainer.insertBefore(view360Container, videoContainer.firstChild);
+        var panoviewerSet = document.getElementById("panoSet");
+        PanoControls.init(panoviewerSet, panoViewer, {
+            enableGyroOption: true,
+            enableTouchOption: true,
+        });
+        PanoControls.showLoading();
 
-      var panoViewer = new eg.view360.PanoViewer(view360Container,
-          {
-              video: video,
-              projectionType: "equirectangular",
-              useZoom: false,
-          }
-      );
+        // Audio
+        var track = document.getElementById('track');
+        var soundButton = document.getElementById('sound-button');
 
-      window.addEventListener("resize", function() {
-          panoViewer.updateViewportDimensions();
-      });
+        function playPause() {
+            if (track.paused) {
+                track.play();
+                $('#sound-button .mute').hide();
+                $('#sound-button .volume').show();
+            } else { 
+                track.pause();
+                $('#sound-button .mute').show();
+                $('#sound-button .volume').hide();
+            }
+        }
 
-      PanoControls.init(document.querySelector("#video"), panoViewer);
-      PanoControls.showLoading();
-  });
-
+        soundButton.addEventListener("click", playPause);
     </script>
-    
-    
-    
-    
-</body>
+  </body>
 </html>

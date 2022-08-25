@@ -3,6 +3,35 @@ body {
   margin: 0 auto;
 }
 
+#sound-button {
+  width: 40px;
+  height: 34px;
+  position: absolute;
+  left: 5px;
+  bottom: 40px;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  background-color: #7fbeff;
+  border: 1px;
+  border-radius: 3px;
+  padding: 2px;
+  box-sizing: border-box;
+  font-size: 0;
+  display: inline-block;
+  vertical-align: middle;
+}
+#sound-button:hover {
+  background-color: #7F1E1F;
+}      
+#sound-button svg {
+  height: 22px;
+  fill: #fff;
+}
+#sound-button .volume {
+  display: none;
+}
+
 .vjs-fullscreen-control {
   display: none !important;
 }

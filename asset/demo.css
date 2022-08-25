@@ -6,13 +6,23 @@ body {
 form.select-audio {
   position: absolute;
   left: 5px;
-  bottom: 45px;
+  bottom: 85px;
 }
+
+form #selection {
+  width: 120px;
+  height: 34px;
+  border-radius: 3px;
+  border: 1px;
+}
+form #selection:focus {
+  outline: none;
+  border: none;
+} 
 
 #sound-button {
   width: 40px;
   height: 34px;
-
   z-index: 10;
   display: flex;
   justify-content: center;

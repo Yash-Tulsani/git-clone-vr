@@ -29,14 +29,14 @@
             <div class="panoviewer container" id="myPanoViewer"></div>
             <form class="select-audio" onsubmit="return false;">
                 <select id="selection">
-                    <option style="display:none;" value="0">Select Audio Track</option>
                     <option value="https://sushantpatial.github.io/VR/audio/tajmahal-english.mp3">English</option>
                     <option value="https://sushantpatial.github.io/VR/audio/tajmahal-hindi.mp3">Hindi</option>
                 </select>
             
                 <audio id="player" controls="controls" style="display: none;">
-                    <source id="mp3_src" src="/teachings/2011_01_09_Cut.mp3" type="audio/mp3" />
+                    <source id="mp3_src" src="https://sushantpatial.github.io/VR/audio/tajmahal-english.mp3" type="audio/mp3" />
                 </audio>
+                
                 <button id="sound-button">
                     <svg class="mute" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
                         <path
@@ -67,6 +67,8 @@
             if (sourceUrl) {
                 source.src = sourceUrl;
                 audio.load();
+                $('#sound-button .mute').show();
+                $('#sound-button .volume').hide();
             }
         }
     </script>

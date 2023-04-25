@@ -7,26 +7,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Taj Mahal 360 Image</title>
 
-    <link rel="stylesheet" href="asset/demo.css">
+    <link rel="stylesheet" href="asset/style.css">
     <link rel="stylesheet" href="https://vjs.zencdn.net/7.17.0/video-js.css">
-    <!-- <link rel="stylesheet" href="https://naver.github.io/egjs-view360/common/css/PanoControls.css"> -->
-    <link rel="stylesheet" href="https://naver.github.io/egjs-view360/release/latest/css/view360.min.css">
+    <link rel="stylesheet" href="https://naver.github.io/egjs-view360/v3/common/css/PanoControls.css">
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
-    <!-- <script src="https://naver.github.io/egjs-view360/common/js/PieView.js"></script>
-    <script src="https://naver.github.io/egjs-view360/common/js/screenfull.min.js"></script>
-    <script src="https://naver.github.io/egjs-view360/common/js/GyroTouchOptions.js"></script>
-    <script src="https://vjs.zencdn.net/7.17.0/video.js"></script> -->
-    <script src="https://naver.github.io/egjs-view360/release/latest/dist/view360.pkgd.min.js"></script>
-    <!-- <script src="https://naver.github.io/egjs-view360/common/js/PanoControls.js"></script> -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/webxr-polyfill@latest/build/webxr-polyfill.min.js"></script>
-    <script src="https://naver.github.io/egjs-view360/common/js/initXR.js"></script> -->
+    <script src="https://naver.github.io/egjs-view360/v3/common/js/PieView.js"></script>
+    <script src="https://naver.github.io/egjs-view360/v3/common/js/screenfull.min.js"></script>
+    <script src="https://naver.github.io/egjs-view360/v3/common/js/GyroTouchOptions.js"></script>
+    <script src="https://vjs.zencdn.net/7.17.0/video.js"></script>
+    <script src="https://naver.github.io/egjs-view360/release/3.6.4/dist/view360.pkgd.js"></script>
+    <script src="https://naver.github.io/egjs-view360/v3/common/js/PanoControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/webxr-polyfill@latest/build/webxr-polyfill.min.js"></script>
+    <script src="https://naver.github.io/egjs-view360/v3/common/js/initXR.js"></script>
 </head>
 
 <body>
     <div class="panoviewer-container viewer">
+        <div id="panoSet">
         <div class="panoviewer container" id="myPanoViewer"></div>
         
         <div class="controls">
@@ -53,15 +52,8 @@
                 </button>
             </form>
     
-            <button id="full-screen-button">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384.97 384.97">
-                    <path
-                        d="M372.939,216.545c-6.123,0-12.03,5.269-12.03,12.03v132.333H24.061V24.061h132.333c6.388,0,12.03-5.642,12.03-12.03    S162.409,0,156.394,0H24.061C10.767,0,0,10.767,0,24.061v336.848c0,13.293,10.767,24.061,24.061,24.061h336.848    c13.293,0,24.061-10.767,24.061-24.061V228.395C384.97,221.731,380.085,216.545,372.939,216.545z" />
-                    <path
-                        d="M372.939,0H252.636c-6.641,0-12.03,5.39-12.03,12.03s5.39,12.03,12.03,12.03h91.382L99.635,268.432    c-4.668,4.668-4.668,12.235,0,16.903c4.668,4.668,12.235,4.668,16.891,0L360.909,40.951v91.382c0,6.641,5.39,12.03,12.03,12.03    s12.03-5.39,12.03-12.03V12.03l0,0C384.97,5.558,379.412,0,372.939,0z" />
-                </svg>
-            </button>
         </div>
+    </div>
 
     </div>
 
@@ -69,10 +61,16 @@
         // 360
         var PanoViewer = eg.view360.PanoViewer;
         const viewer = new PanoViewer(document.getElementById("myPanoViewer"), {
-            image: "https://sushantpatial.github.io/VR/images/tajmahal/4.png",
-            projectionType: "equirectangular",
-            gyro: true
+            image: "https://sushantpatial.github.io/VR/images/TajMahal.png",
+            projectionType: "equirectangular"
         });
+
+        var panoviewerSet = document.getElementById("panoSet");
+        PanoControls.init(panoviewerSet, viewer, {
+            enableGyroOption: true,
+            enableTouchOption: true
+        });
+        PanoControls.showLoading();
 
         // Full Screen
         $('#full-screen-button').on('click', function () {

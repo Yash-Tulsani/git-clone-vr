@@ -9,18 +9,17 @@
 
     <link rel="stylesheet" href="asset/demo.css">
     <link rel="stylesheet" href="https://vjs.zencdn.net/7.17.0/video-js.css">
-    <link rel="stylesheet" href="https://naver.github.io/egjs-view360/common/css/PanoControls.css">
+    <!-- <link rel="stylesheet" href="https://naver.github.io/egjs-view360/common/css/PanoControls.css"> -->
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://naver.github.io/egjs-view360/common/js/PieView.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <!-- <script src="https://naver.github.io/egjs-view360/common/js/PieView.js"></script>
     <script src="https://naver.github.io/egjs-view360/common/js/screenfull.min.js"></script>
     <script src="https://naver.github.io/egjs-view360/common/js/GyroTouchOptions.js"></script>
-    <script src="https://vjs.zencdn.net/7.17.0/video.js"></script>
+    <script src="https://vjs.zencdn.net/7.17.0/video.js"></script> -->
     <script src="https://naver.github.io/egjs-view360/release/latest/dist/view360.pkgd.js"></script>
-    <script src="https://naver.github.io/egjs-view360/common/js/PanoControls.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/webxr-polyfill@latest/build/webxr-polyfill.min.js"></script>
-    <script src="https://naver.github.io/egjs-view360/common/js/initXR.js"></script>
+    <!-- <script src="https://naver.github.io/egjs-view360/common/js/PanoControls.js"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/webxr-polyfill@latest/build/webxr-polyfill.min.js"></script>
+    <script src="https://naver.github.io/egjs-view360/common/js/initXR.js"></script> -->
 </head>
 
 <body>
@@ -78,15 +77,16 @@
         var container = document.getElementById("myPanoViewer");
         var panoViewer = new PanoViewer(container, {
             image: "https://sushantpatial.github.io/VR/images/tajmahal/4.png",
-            projectionType: "equirectangular"
+            projectionType: "equirectangular",
+            gyro: true
         });
 
-        var panoviewerSet = document.getElementById("panoSet");
-        PanoControls.init(panoviewerSet, panoViewer, {
-            enableGyroOption: true,
-            enableTouchOption: true
-        });
-        PanoControls.showLoading();
+        // var panoviewerSet = document.getElementById("panoSet");
+        // PanoControls.init(panoviewerSet, panoViewer, {
+        //     enableGyroOption: true,
+        //     enableTouchOption: true
+        // });
+        // PanoControls.showLoading();
 
         // Audio
         var track = document.getElementById('player');

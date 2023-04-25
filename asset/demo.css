@@ -3,10 +3,16 @@ body {
   margin: 0 auto;
 }
 
-form.select-audio {
+.controls {
+  display: flex;
   position: absolute;
-  left: 5px;
-  bottom: 85px;
+  justify-content: space-between;
+  width: 100%;
+  bottom: 10%;
+}
+
+form.select-audio {
+  margin-left: 20px;
 }
 
 form #selection {
@@ -20,7 +26,11 @@ form #selection:focus {
   border: none;
 } 
 
-#sound-button {
+#full-screen-button {
+  margin-right: 20px;
+}
+
+#sound-button, #full-screen-button {
   width: 40px;
   height: 34px;
   z-index: 10;
@@ -35,10 +45,10 @@ form #selection:focus {
   display: inline-block;
   vertical-align: middle;
 }
-#sound-button:hover {
+#sound-button:hover, #full-screen-button:hover {
   background-color: #d16e1d;
 }      
-#sound-button svg {
+#sound-button svg, #full-screen-button svg {
   height: 22px;
   fill: #fff;
 }

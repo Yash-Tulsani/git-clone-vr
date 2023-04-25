@@ -10,13 +10,16 @@
     <link rel="stylesheet" href="asset/demo.css">
     <link rel="stylesheet" href="https://vjs.zencdn.net/7.17.0/video-js.css">
     <!-- <link rel="stylesheet" href="https://naver.github.io/egjs-view360/common/css/PanoControls.css"> -->
+    <link rel="stylesheet" href="https://naver.github.io/egjs-view360/release/latest/css/view360.min.css">
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
     <!-- <script src="https://naver.github.io/egjs-view360/common/js/PieView.js"></script>
     <script src="https://naver.github.io/egjs-view360/common/js/screenfull.min.js"></script>
     <script src="https://naver.github.io/egjs-view360/common/js/GyroTouchOptions.js"></script>
     <script src="https://vjs.zencdn.net/7.17.0/video.js"></script> -->
-    <script src="https://naver.github.io/egjs-view360/release/latest/dist/view360.pkgd.js"></script>
+    <script src="https://naver.github.io/egjs-view360/release/latest/dist/view360.pkgd.min.js"></script>
     <!-- <script src="https://naver.github.io/egjs-view360/common/js/PanoControls.js"></script> -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/webxr-polyfill@latest/build/webxr-polyfill.min.js"></script>
     <script src="https://naver.github.io/egjs-view360/common/js/initXR.js"></script> -->
@@ -24,18 +27,20 @@
 
 <body>
     <div class="panoviewer-container viewer">
-        <div id="panoSet">
-            <div class="panoviewer container" id="myPanoViewer"></div>
+        <div class="panoviewer container" id="myPanoViewer"></div>
+        
+        <div class="controls">
             <form class="select-audio" onsubmit="return false;">
                 <select id="selection">
                     <option value="https://sushantpatial.github.io/VR/audio/tajmahal-english.mp3">English</option>
                     <option value="https://sushantpatial.github.io/VR/audio/tajmahal-hindi.mp3">Hindi</option>
                 </select>
-            
+    
                 <audio id="player" controls="controls" style="display: none;">
-                    <source id="mp3_src" src="https://sushantpatial.github.io/VR/audio/tajmahal-english.mp3" type="audio/mp3" />
+                    <source id="mp3_src" src="https://sushantpatial.github.io/VR/audio/tajmahal-english.mp3"
+                        type="audio/mp3" />
                 </audio>
-                
+    
                 <button id="sound-button">
                     <svg class="mute" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
                         <path
@@ -46,47 +51,37 @@
                             d="M412.6 182c-10.28-8.334-25.41-6.867-33.75 3.402c-8.406 10.24-6.906 25.35 3.375 33.74C393.5 228.4 400 241.8 400 255.1c0 14.17-6.5 27.59-17.81 36.83c-10.28 8.396-11.78 23.5-3.375 33.74c4.719 5.806 11.62 8.802 18.56 8.802c5.344 0 10.75-1.779 15.19-5.399C435.1 311.5 448 284.6 448 255.1S435.1 200.4 412.6 182zM473.1 108.2c-10.22-8.334-25.34-6.898-33.78 3.34c-8.406 10.24-6.906 25.35 3.344 33.74C476.6 172.1 496 213.3 496 255.1s-19.44 82.1-53.31 110.7c-10.25 8.396-11.75 23.5-3.344 33.74c4.75 5.775 11.62 8.771 18.56 8.771c5.375 0 10.75-1.779 15.22-5.431C518.2 366.9 544 313 544 255.1S518.2 145 473.1 108.2zM534.4 33.4c-10.22-8.334-25.34-6.867-33.78 3.34c-8.406 10.24-6.906 25.35 3.344 33.74C559.9 116.3 592 183.9 592 255.1s-32.09 139.7-88.06 185.5c-10.25 8.396-11.75 23.5-3.344 33.74C505.3 481 512.2 484 519.2 484c5.375 0 10.75-1.779 15.22-5.431C601.5 423.6 640 342.5 640 255.1S601.5 88.34 534.4 33.4zM301.2 34.98c-11.5-5.181-25.01-3.076-34.43 5.29L131.8 160.1H48c-26.51 0-48 21.48-48 47.96v95.92c0 26.48 21.49 47.96 48 47.96h83.84l134.9 119.8C272.7 477 280.3 479.8 288 479.8c4.438 0 8.959-.9314 13.16-2.835C312.7 471.8 320 460.4 320 447.9V64.12C320 51.55 312.7 40.13 301.2 34.98z" />
                     </svg>
                 </button>
+            </form>
+    
+            <button id="full-screen-button">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384.97 384.97">
+                    <path
+                        d="M372.939,216.545c-6.123,0-12.03,5.269-12.03,12.03v132.333H24.061V24.061h132.333c6.388,0,12.03-5.642,12.03-12.03    S162.409,0,156.394,0H24.061C10.767,0,0,10.767,0,24.061v336.848c0,13.293,10.767,24.061,24.061,24.061h336.848    c13.293,0,24.061-10.767,24.061-24.061V228.395C384.97,221.731,380.085,216.545,372.939,216.545z" />
+                    <path
+                        d="M372.939,0H252.636c-6.641,0-12.03,5.39-12.03,12.03s5.39,12.03,12.03,12.03h91.382L99.635,268.432    c-4.668,4.668-4.668,12.235,0,16.903c4.668,4.668,12.235,4.668,16.891,0L360.909,40.951v91.382c0,6.641,5.39,12.03,12.03,12.03    s12.03-5.39,12.03-12.03V12.03l0,0C384.97,5.558,379.412,0,372.939,0z" />
+                </svg>
+            </button>
         </div>
+
     </div>
 
     <script>
-        $(document).ready(function () {
-            $('#selection').on('change', function () {
-                change($(this).val());
-            });
-
-        });
-
-        function change(sourceUrl) {
-            var audio = document.getElementById("player");
-            var source = document.getElementById("mp3_src");
-
-            audio.pause();
-
-            if (sourceUrl) {
-                source.src = sourceUrl;
-                audio.load();
-                $('#sound-button .mute').show();
-                $('#sound-button .volume').hide();
-            }
-        }
-    </script>
-
-    <script>
+        // 360
         var PanoViewer = eg.view360.PanoViewer;
-        var container = document.getElementById("myPanoViewer");
-        var panoViewer = new PanoViewer(container, {
+        const viewer = new PanoViewer(document.getElementById("myPanoViewer"), {
             image: "https://sushantpatial.github.io/VR/images/tajmahal/4.png",
             projectionType: "equirectangular",
             gyro: true
         });
 
-        // var panoviewerSet = document.getElementById("panoSet");
-        // PanoControls.init(panoviewerSet, panoViewer, {
-        //     enableGyroOption: true,
-        //     enableTouchOption: true
-        // });
-        // PanoControls.showLoading();
+        // Full Screen
+        $('#full-screen-button').on('click', function () {
+            if (document.fullscreenElement) {
+                document.exitFullscreen();
+            } else {
+                $('body').get(0).requestFullscreen();
+            }
+        });
 
         // Audio
         var track = document.getElementById('player');
@@ -103,8 +98,28 @@
                 $('#sound-button .volume').hide();
             }
         }
-
         soundButton.addEventListener("click", playPause);
+
+        // Select Change
+        $(document).ready(function () {
+            $('#selection').on('change', function () {
+                change($(this).val());
+            });
+        });
+
+        function change(sourceUrl) {
+            var audio = document.getElementById("player");
+            var source = document.getElementById("mp3_src");
+
+            audio.pause();
+
+            if (sourceUrl) {
+                source.src = sourceUrl;
+                audio.load();
+                $('#sound-button .mute').show();
+                $('#sound-button .volume').hide();
+            }
+        }
     </script>
 </body>
 
